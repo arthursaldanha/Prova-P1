@@ -10,8 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "chalk": "^5.0.1",
-    "lodash": "^4.17.21",
     "prompt-sync": "^4.2.0"
   }
 }
