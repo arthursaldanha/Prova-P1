@@ -22,6 +22,7 @@ const pedidoFinalFormato = {
   itens: this.itens,
   valorTotal: this.valorTotal,
   custoTotal: this.custoTotal,
+  criadoEm: this.criadoEm,
   status: this.status
 };
 
@@ -253,6 +254,14 @@ const criarPedido = () => {
       }
       pedidoFinal.valorTotal = Number(valorTotalPedido).toFixed(2)
 
+      let dataPedido = new Date();
+
+      let opcoesData = { year: 'numeric', month: 'long', day: '2-digit' };
+      let dataFormatada = dataPedido.toLocaleDateString('pt-BR', opcoesData);
+
+      let horaFormatada = dataPedido.toLocaleTimeString('pt-BR');
+      pedidoFinal.criadoEm = `${dataFormatada} às ${horaFormatada}`;
+
       pedidoFinal.status = 'Em andamento!'
 
       filaDePedidos.push(pedidoFinal)
@@ -296,6 +305,7 @@ const listarPedido = () => {
       console.log(`${itens.quantidade}x - ${itens.nome} - R$ ${itens.valor}`);
     }
     console.log(`Valor total: R$ ${pedido.valorTotal}`);
+    console.log(`Criado em: ${pedido.criadoEm}`)
     console.log(`Status atual: ${pedido.status}`);
     console.log('');
   })
@@ -357,24 +367,58 @@ const finalizarPedido = () => {
   if (indicePedido === -1) {
     console.log('Não há pedido com esse ID! Verifique se foi digitado corretamente!');
     finalizarPedido();
-  } else {
-    const indicePedido = filaDePedidos.findIndex(pedido => pedido.id === idParaFinalizarPedido)
-    filaDePedidos[indicePedido].status = 'Finalizado!'
 
-    if (filaDePedidos[indicePedido].status === 'Finalizado!') {
-      console.clear();
-      console.log('Pedido finalizado com sucesso!');
-
-      setTimeout(() => {
-        console.log('Em instantes, você será redirecionado para o modo funcionário!')
-      }, 1 * 2000)
-
-      setTimeout(() => {
-        console.clear();
-        opcoesFuncionario();
-      }, 4 * 1000)
-    }
+    return
   }
+
+  if (filaDePedidos[indicePedido].status === 'Finalizado!') {
+    console.clear();
+    console.log('Este pedido já está finalizado!');
+
+    setTimeout(() => {
+      console.log('Em instantes, você será redirecionado para o modo funcionário!')
+    }, 3 * 2000)
+
+    setTimeout(() => {
+      console.clear();
+      opcoesFuncionario();
+    }, 5 * 1000)
+
+    return
+  }
+
+  filaDePedidos[indicePedido].status = 'Finalizado!'
+
+  if (filaDePedidos[indicePedido].status === 'Finalizado!') {
+    console.clear();
+    console.log('Pedido finalizado com sucesso!');
+
+    setTimeout(() => {
+      console.log('Em instantes, você será redirecionado para o modo funcionário!')
+    }, 2 * 2000)
+
+    setTimeout(() => {
+      console.clear();
+      opcoesFuncionario();
+    }, 4 * 1000)
+
+    return
+  } else {
+    console.clear();
+    console.log('Houve algum problema ao finalizar o pedido!');
+
+    setTimeout(() => {
+      console.log('Em instantes, você será redirecionado para o modo funcionário!')
+    }, 2 * 2000)
+
+    setTimeout(() => {
+      console.clear();
+      opcoesFuncionario();
+    }, 4 * 1000)
+
+    return
+  }
+
 }
 
 /* ________________________________________________________________________________________________ */
