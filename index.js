@@ -656,7 +656,7 @@ const visualizarCustosLucros = () => {
 // Comandos Gerais
 const iniciandoPrograma = () => {
   console.clear()
-  console.log('------------------- Bem vindo ao sisteminha da Meyrezada! -------------------')
+  console.log('------------------- Bem vindo ao sisteminha do Pasteu do Irineu! -------------------')
 
   console.log('[1] - Funcionário')
   console.log('[2] - Gerente')
