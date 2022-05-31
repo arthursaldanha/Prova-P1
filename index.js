@@ -167,14 +167,17 @@ const criarPedido = () => {
     return
   }
 
-  while (isNaN(opcaoProdutoDigitada) || !arrayProdutos.find((produto) => produto.id === opcaoProdutoDigitada) || opcaoProdutoDigitada !== 99) {
-    // FIX Looping on error
+  while (isNaN(opcaoProdutoDigitada) || !arrayProdutos.find((produto) => produto.id === opcaoProdutoDigitada)) {
     console.clear();
     opcoesParaCriarPedido();
     opcaoProdutoDigitada = idProdutoDigitado();
   }
 
   let quantidadeSolicitada = quantidadeProdutoDigitado(opcaoProdutoDigitada)
+
+  while (isNaN(quantidadeSolicitada)) {
+    quantidadeSolicitada = quantidadeProdutoDigitado(opcaoProdutoDigitada)
+  }
 
   if (quantidadeSolicitada > arrayProdutos[opcaoProdutoDigitada - 1].quantidade) {
     console.log('');
