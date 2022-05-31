@@ -167,8 +167,9 @@ const criarPedido = () => {
     return
   }
 
-  while (isNaN(opcaoProdutoDigitada) || !arrayProdutos.find((produto) => produto.id === opcaoProdutoDigitada)) {
+  while (isNaN(opcaoProdutoDigitada) || !arrayProdutos.find((produto) => produto.id === opcaoProdutoDigitada) || opcaoProdutoDigitada !== 99) {
     // FIX Looping on error
+    console.clear();
     opcoesParaCriarPedido();
     opcaoProdutoDigitada = idProdutoDigitado();
   }
@@ -648,6 +649,8 @@ const visualizarCustosLucros = () => {
   }
 }
 
+/* ________________________________________________________________________________________________ */
+// Comandos Gerais
 const iniciandoPrograma = () => {
   console.clear()
   console.log('------------------- Bem vindo ao sisteminha da Meyrezada! -------------------')
